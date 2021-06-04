@@ -1,6 +1,6 @@
-//Tri Le
-//CS410 RUST
-use rand::Rng;
+use std::cmp::PartialEq;
+use std::collections::HashMap;
+
 pub const MAX: usize = 20;
 pub const DISTANCE: usize = 3;
 
@@ -19,16 +19,6 @@ impl Point {
     pub fn new(x: usize, y: usize) -> Self {
         Self { x, y }
     }
-}
-
-use std::cmp::PartialEq;
-use std::collections::HashMap;
-
-#[derive(Default, Debug, Clone)]
-pub struct Player {
-    pub side: u8,
-    pub point_dic: Vec<Point>,
-    pub total_score: i32,
 }
 
 
@@ -299,6 +289,14 @@ impl Player {
         }
 
         false
+    }
+
+    fn opposite_side(&self) -> u8 {
+        if self.side == 1 {
+            2
+        } else {
+            1
+        }
     }
 
 }
