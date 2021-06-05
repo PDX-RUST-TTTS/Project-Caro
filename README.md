@@ -1,6 +1,9 @@
 
 Background <br><br>
 Gomoku game  project which is a board game based on the popular Japanese strategy board game called Gomoku. The game is played on a 15 x 15 grid or sometimes on a 19 x 19 grid, depending on the version. For this project, we will be aiming for 15 x 15. Gomoku is somewhat similar to Tic Tac Toe except that the former requires the player to be able to create an unbroken row of five symbols whereas Tic Tac Toe is played on a 3 x 3 grid and only requires the player to create an unbroken row of three symbols to win. This game requires 5 symbols of “X” or ”O” to win which is popular in many Asian countries, or if there are no more moves, we  call  it  “a  tie”.  Now  it  has  also  gained  wide  popularity  all  over  the  world.  <br><br>
+Technologies Used<br><br>
+•	Rust in Stable run with direct access to hardware and memory, Rust is an ideal language for embedded and bare-metal development which helps us to write extremely low-level code, such as operating system kernels or microcontroller applications. Rust’s core types and functions as well as reusable library code shine in these especially challenging environments.<br>
+•	Iced version 0.3.0 cross-platform GUI library inspired by Elm which was simple, easy-to-use, batteries-included API Type-safe, reactive programming model Cross-platform support.<br>
 
 Rules<br><br>
     • It is played using the X and O symbol like in tic tac toe. Two players play against each other on a 15 x 15.<br><br>
