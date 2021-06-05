@@ -41,3 +41,14 @@ enum Message {
     NewGame,
     ExitGame,
 }
+
+impl Sandbox for GomukuUI {
+    type Message = Message;
+
+    fn new() -> Self {
+        Self::default()
+    }
+
+    fn title(&self) -> String {
+        String::from("Rust Gomoku")
+    }
