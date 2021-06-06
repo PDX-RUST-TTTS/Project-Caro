@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 iced = "0.3"
+gomoku_ai = { path = "../gomoku_ai" }
