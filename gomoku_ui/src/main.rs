@@ -161,8 +161,31 @@ impl Sandbox for GomukuUI {
                 }
             }
 
-            /****************************************************************************************/
-
+    Message::RadioSelected(choice) => {
+        self.selected_choice = Some(choice);
+        }
+        Message::NewGame => {
+            if  self.selected_choice.is_some() {
+                self.matrix = [[0; MAX]; MAX];
+                self.player1 = Player::new(2);
+                self.ai = Player::new(1);
+                self.turn = self.player1.side as i32;
+                for i in 0..MAX {
+                    for j in 0..MAX {
+                        self.text[i][j] = " ".to_string();
+                    }
+                }
+                    self.game_state = Some(GameState::Running);
+                    self.information = "Ready to play!".to_string();
+                } else {
+                    self.information = "Please select who \n  you want to play with !".to_string();
+                }
+            }
+            Message::ExitGame => {}
+        }
+    }
+    
+    /****************************************************************************************/
     fn view(&mut self) -> Element<Message> {
         let mut iter = self.btn.iter_mut().flat_map(|r| r.iter_mut());
         let mut row_main: Row<Message> = Row::new();
