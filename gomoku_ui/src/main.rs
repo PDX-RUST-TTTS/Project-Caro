@@ -160,3 +160,106 @@ impl Sandbox for GomukuUI {
                     self.information = "Please start new game to play".to_string();
                 }
             }
+
+            /****************************************************************************************/
+
+    fn view(&mut self) -> Element<Message> {
+        let mut iter = self.btn.iter_mut().flat_map(|r| r.iter_mut());
+        let mut row_main: Row<Message> = Row::new();
+
+        let mut col_play_area: Column<Message> = Column::new();
+        let mut row: Row<Message> = Row::new();
+        row = row.push(
+            Column::new()
+                .push(Row::new().push(Text::new("")).padding(2))
+                .height(Length::Units(35))
+                .width(Length::Units(35)),
+        );
+        for i in 0..MAX {
+            row = row.push(
+                Column::new()
+                    .push(Row::new().push(Text::new(i.to_string())).padding(2))
+                    .height(Length::Units(35))
+                    .width(Length::Units(35))
+                    .padding(5),
+            );
+        }
+        col_play_area = col_play_area.push(row);
+        for i in 0..MAX {
+            let mut row: Row<Message> = Row::new();
+            row = row.push(
+                Column::new()
+                    .push(Row::new().push(Text::new(i.to_string())).padding(2))
+                    .height(Length::Units(35))
+                    .width(Length::Units(35)),
+            );
+            for j in 0..MAX {
+                row = row.push(
+                    Button::new(
+                        iter.next().unwrap(),
+                        Text::new(&self.text[i][j]).color(self.text_color[i][j]),
+                    )
+                    .height(Length::Units(35))
+                    .width(Length::Units(35))
+                    .on_press(Message::Check(i, j)),
+                );
+            }
+            col_play_area = col_play_area.push(row);
+        }
+        let mut col_control_area: Column<Message> = Column::new();
+        let col_padding: Column<Message> = Column::new().width(Length::Units(35));
+
+        col_control_area = col_control_area
+            .push(Row::new().height(Length::Units(50)))
+            .push(
+                Text::new("Rust Gomoku")
+                    .color(Color::from_rgb8(87, 78, 206))
+                    .size(50),
+            )
+            .push(Row::new().height(Length::Units(100)))
+            .push(
+                Row::new().push(
+                    Column::new()
+                        .push(Radio::new(
+                            Choice::AI,
+                            "Player vs AI",
+                            self.selected_choice,
+                            Message::RadioSelected,
+                        ))
+                        .push(Row::new().height(Length::Units(20)))
+                        .push(Radio::new(
+                            Choice::Player,
+                            "Player vs Player",
+                            self.selected_choice,
+                            Message::RadioSelected,
+                        )),
+                ),
+            )
+            .push(Row::new().height(Length::Units(20)))
+            .push(
+                Row::new().push(
+                    Column::new()
+                        .push(
+                            Button::new(&mut self.new_game, Text::new("New Game"))
+                                .height(Length::Units(35))
+                                .width(Length::Units(200))
+                                .on_press(Message::NewGame),
+                        )
+                        .push(Row::new().height(Length::Units(20)))
+                        .push(
+                            Button::new(&mut self.exit, Text::new("Exit"))
+                                .height(Length::Units(35))
+                                .width(Length::Units(200))
+                                .on_press(Message::ExitGame),
+                        ),
+                ),
+            )
+            .push(Row::new().height(Length::Units(20)))
+            .push(Text::new(&self.information));
+
+        row_main = row_main.push(col_play_area);
+        row_main = row_main.push(col_padding);  
+        row_main = row_main.push(col_control_area);
+        row_main.into()
+    }
+}
