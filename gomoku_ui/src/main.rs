@@ -182,7 +182,7 @@ impl Sandbox for GomukuUI {
                 }
             }
             Message::ExitGame => {
-                process::exit(0x0100);
+                process::exit(0x0);
             }
         }
     }
