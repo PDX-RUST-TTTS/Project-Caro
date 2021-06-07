@@ -353,21 +353,19 @@ pub fn find_best_move(
         if user.add_new_point(point.clone(), &mut matrix, &mut test_for_user) {
             test_for_user = 1000.0;
         }
-        test_for_ai += 1.0;
-        // if test_for_user > test_for_ai {
-        //     final_board.push((point, test_for_user));
-        // } else {
-        //     final_board.push((point, test_for_ai));
-        // }
-        final_board.push((point, test_for_ai + test_for_user));
+        if test_for_ai < 200.0 {
+            final_board.push((point, test_for_ai + test_for_user));
+        } else {
+            final_board.push((point, 200.0 + test_for_ai + test_for_user));
+        }
     }
     final_board.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
     final_board.reverse();
-    println!("###Considering points:");
-    for (point, score) in &final_board {
-        print!("({},{})={} ", point.x, point.y, score);
-    }
-    println!();
+    // println!("###Considering points:");
+    // for (point, score) in &final_board {
+    //     print!("({},{})={} ", point.x, point.y, score);
+    // }
+    // println!();
 
     if !final_board.is_empty() {
         let (result, _) = &final_board[0];
