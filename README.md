@@ -14,9 +14,9 @@ Gomoku game project is a board game based on the popular Japanese strategy board
 - Think before you make move because this game seems like a small and easy game but there is a lot of thinking and strategy involved in it like forcing the opponent to place their symbol.
 
 ## Hints:
-- Always have a strategy within seconds and in most of the times you stick to it unless the oponent forces you to do something else. Occasionally after finding the typical move which you would play try to play new move which would refresh the game and might surprise the opponent.  the good tactics would be to let him attack, yet control the position until he has nowhere to build the attack.     
-- Always pay a special attention and use more time on the first ten moves of the game, which mostly define the whole game. If you make a bad move the beginning of the game, you will not be able to save it even you if are a good player.
-- Always block the opponents four and then think. Do not spend time to think what this four would change in the position. If you want to continue the game, you have only one move to play. You can think about the position after the move.
+- Always have a strategy in most of the times you stick to it unless the oponent forces you to do something else. Occasionally after finding the typical move which you would play try to play new move which would refresh the game and might surprise the opponent. A good tactics would be to let the opponent attack, yet control the position until he has nowhere to build the attack.     
+- Always pay a special attention and use more time on the first ten moves of the game, which mostly define the whole game. If you make a bad move the beginning of the game, you will not be able to turn it around even you if are a very good player.
+- Always block the opponents four and prevent him from winning and then think and do not spend time to think what this four would change in the position. If you want to continue the game, you can think about the position after the move.
 - Always check the position after opponents move and try to read his next move and do not play immediately. Even if the opponent played the move you expected, do not play your move with seconds make sure the position you counted in your head is going to be developed the same way on the board.
 ## Technologies Used: 
 - Rust Programming Language in Stable run. [Official Rust site](https://www.rust-lang.org/).
