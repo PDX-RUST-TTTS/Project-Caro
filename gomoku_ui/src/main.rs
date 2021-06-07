@@ -102,11 +102,8 @@ impl Sandbox for GomukuUI {
                                 format!("Your move is ({},{}\n now is AI's turn", x, y);
                             self.information = "AI is thinking".to_string();
                             // thread::sleep( time::Duration::from_millis(1000));
-                            find_result = find_best_move(
-                                self.ai.clone(),
-                                self.player1.clone(),
-                                self.matrix.clone(),
-                            );
+                            find_result =
+                                find_best_move(self.ai.clone(), self.player1.clone(), self.matrix);
                         }
 
                         if self.player1.point_dic.len() + self.ai.point_dic.len() == MAX * MAX {
@@ -161,20 +158,20 @@ impl Sandbox for GomukuUI {
                 }
             }
 
-    Message::RadioSelected(choice) => {
-        self.selected_choice = Some(choice);
-        }
-        Message::NewGame => {
-            if  self.selected_choice.is_some() {
-                self.matrix = [[0; MAX]; MAX];
-                self.player1 = Player::new(2);
-                self.ai = Player::new(1);
-                self.turn = self.player1.side as i32;
-                for i in 0..MAX {
-                    for j in 0..MAX {
-                        self.text[i][j] = " ".to_string();
+            Message::RadioSelected(choice) => {
+                self.selected_choice = Some(choice);
+            }
+            Message::NewGame => {
+                if self.selected_choice.is_some() {
+                    self.matrix = [[0; MAX]; MAX];
+                    self.player1 = Player::new(2);
+                    self.ai = Player::new(1);
+                    self.turn = self.player1.side as i32;
+                    for i in 0..MAX {
+                        for j in 0..MAX {
+                            self.text[i][j] = " ".to_string();
+                        }
                     }
-                }
                     self.game_state = Some(GameState::Running);
                     self.information = "Ready to play!".to_string();
                 } else {
@@ -184,7 +181,7 @@ impl Sandbox for GomukuUI {
             Message::ExitGame => {}
         }
     }
-    
+
     /****************************************************************************************/
     fn view(&mut self) -> Element<Message> {
         let mut iter = self.btn.iter_mut().flat_map(|r| r.iter_mut());
@@ -281,7 +278,7 @@ impl Sandbox for GomukuUI {
             .push(Text::new(&self.information));
 
         row_main = row_main.push(col_play_area);
-        row_main = row_main.push(col_padding);  
+        row_main = row_main.push(col_padding);
         row_main = row_main.push(col_control_area);
         row_main.into()
     }
