@@ -1,3 +1,6 @@
+use std::process;
+
+
 use gomoku_ai::{find_best_move, Player, Point, MAX};
 
 use iced::{button, Button, Color, Column, Element, Length, Radio, Row, Sandbox, Settings, Text};
@@ -178,7 +181,9 @@ impl Sandbox for GomukuUI {
                     self.information = "Please select who \n  you want to play with !".to_string();
                 }
             }
-            Message::ExitGame => {}
+            Message::ExitGame => {
+                process::exit(0x0100);
+            }
         }
     }
 
