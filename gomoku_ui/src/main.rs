@@ -1,8 +1,6 @@
 use std::process;
-
 //gomoku_ai crate
 use gomoku_ai::{find_best_move, Player, Point, MAX};
-
 //iced crate
 use iced::{button, Button, Color, Column, Element, Length, Radio, Row, Sandbox, Settings, Text};
 
@@ -29,7 +27,7 @@ struct GomukuUI {
     last_point: Point,
 }
 
-//The option for player, who do you want to play against
+//The options for player, who do player want to play against
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Choice {
     Player,
@@ -42,7 +40,7 @@ pub enum GameState {
     GameEnding,
 }
 
-//Prompt the message for the user cansee then they can make the choice
+//Prompt the message for the user cansee then they can make the choice in user interface
 #[derive(Debug, Clone, Copy)]
 enum Message {
     Check(usize, usize),
@@ -51,7 +49,7 @@ enum Message {
     ExitGame,
 }
 
-//Impliment Sandbox for GomukuUI
+//Implement Sandbox for GomukuUI
 impl Sandbox for GomukuUI {
     type Message = Message;
 
@@ -207,6 +205,7 @@ impl Sandbox for GomukuUI {
         }
     }
 
+    //implement view function to render to user interface
     fn view(&mut self) -> Element<Message> {
         let mut iter = self.btn.iter_mut().flat_map(|r| r.iter_mut());
         let mut row_main: Row<Message> = Row::new();
