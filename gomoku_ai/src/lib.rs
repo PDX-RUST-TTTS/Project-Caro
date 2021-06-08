@@ -14,13 +14,14 @@ pub struct Point {
     pub x: usize,
     pub y: usize,
 }
-
+/// Points in Game
 impl Point {
     pub fn new(x: usize, y: usize) -> Self {
         Self { x, y }
     }
 }
 
+/// Information of Player
 #[derive(Default, Debug, Clone)]
 pub struct Player {
     pub side: u8,
@@ -29,6 +30,7 @@ pub struct Player {
 }
 
 impl Player {
+    // Create new Player
     pub fn new(side: u8) -> Self {
         Self {
             side,
@@ -37,12 +39,15 @@ impl Player {
         }
     }
 
+    /// Check and give points for a point
+    ///
     fn check_line(
         &mut self,
         point: &Point,
         matrix: &[[u8; MAX]; MAX],
         test_point: &mut f32,
     ) -> bool {
+        // rubric for AI to evaluate a point
         let compound_samples: Vec<(i16, Vec<String>, f32)> = vec![
             (2, vec!["_XX#XO".to_string(), "_XX#XO".to_string()], 200.0),
             (2, vec!["_XX#XO".to_string(), "_X#XXO".to_string()], 200.0),
@@ -70,12 +75,15 @@ impl Player {
             (15, vec!["_#X__".to_string()], 5.0),
             (8, vec!["#X_".to_string()], 1.0),
         ];
+
+        // check for winning
         let winning_samples: Vec<(u16, String, f32)> = vec![
             (1, "#XXXX".to_string(), 1000.0),
             (2, "X#XXX".to_string(), 1000.0),
             (3, "XX#XX".to_string(), 1000.0),
         ];
 
+        // move back c points from the current point on a direction
         fn back(point: &Point, c: usize, direction: u8) -> Result<Point, bool> {
             match direction {
                 //Horizon
@@ -109,6 +117,8 @@ impl Player {
                 _ => Err(false),
             }
         }
+
+        // move forward c points from the current point on a direction
         fn forward(point: &Point, c: usize, direction: u8) -> Result<Point, bool> {
             match direction {
                 //Horizon
@@ -143,6 +153,7 @@ impl Player {
             }
         }
 
+        // find the position of the point in a sample
         fn find_pos(sample: &str) -> i8 {
             let sample_chars = sample.chars();
             for (i, ch) in sample_chars.enumerate() {
@@ -152,6 +163,8 @@ impl Player {
             }
             -1
         }
+
+        //check whether the sample matches
         fn is_match(
             direction: u8,
             point: &Point,
@@ -287,7 +300,8 @@ impl Player {
         false
     }
 
-    //Return true -> this player is the winner
+    /// Add new point and evaluate the heuristic points of a new move
+    /// # Return: true if winning and false if not winning
     pub fn add_new_point(
         &mut self,
         point: Point,
@@ -332,6 +346,7 @@ impl Player {
     }
 }
 
+/// Find the best move (AI)
 pub fn find_best_move(
     mut ai: Player,
     mut user: Player,
@@ -353,21 +368,19 @@ pub fn find_best_move(
         if user.add_new_point(point.clone(), &mut matrix, &mut test_for_user) {
             test_for_user = 1000.0;
         }
-        test_for_ai += 1.0;
-        // if test_for_user > test_for_ai {
-        //     final_board.push((point, test_for_user));
-        // } else {
-        //     final_board.push((point, test_for_ai));
-        // }
-        final_board.push((point, test_for_ai + test_for_user));
+        if test_for_ai < 200.0 {
+            final_board.push((point, test_for_ai + test_for_user));
+        } else {
+            final_board.push((point, 200.0 + test_for_ai + test_for_user));
+        }
     }
     final_board.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
     final_board.reverse();
-    println!("###Considering points:");
-    for (point, score) in &final_board {
-        print!("({},{})={} ", point.x, point.y, score);
-    }
-    println!();
+    // println!("###Considering points:");
+    // for (point, score) in &final_board {
+    //     print!("({},{})={} ", point.x, point.y, score);
+    // }
+    // println!();
 
     if !final_board.is_empty() {
         let (result, _) = &final_board[0];
@@ -376,6 +389,7 @@ pub fn find_best_move(
     None
 }
 
+/// Get all possible moves
 pub fn get_all_board_move(
     result: &mut HashMap<Point, i32>,
     local_point: Vec<Point>,
