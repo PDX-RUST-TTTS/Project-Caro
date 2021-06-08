@@ -1,14 +1,17 @@
 use std::process;
 
-
+//gomoku_ai crate
 use gomoku_ai::{find_best_move, Player, Point, MAX};
 
+//iced crate
 use iced::{button, Button, Color, Column, Element, Length, Radio, Row, Sandbox, Settings, Text};
 
+//main function
 pub fn main() -> iced::Result {
     GomukuUI::run(Settings::default())
 }
 
+//GomukuUI struct
 #[derive(Default)]
 struct GomukuUI {
     text_color: [[Color; MAX]; MAX],
@@ -26,17 +29,20 @@ struct GomukuUI {
     last_point: Point,
 }
 
+//The option for player, who do you want to play against
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Choice {
     Player,
     AI,
 }
 
+//The state of caro game is running or ending
 pub enum GameState {
     Running,
     GameEnding,
 }
 
+//Prompt the message for the user cansee then they can make the choice
 #[derive(Debug, Clone, Copy)]
 enum Message {
     Check(usize, usize),
@@ -45,6 +51,7 @@ enum Message {
     ExitGame,
 }
 
+//Impliment Sandbox for GomukuUI
 impl Sandbox for GomukuUI {
     type Message = Message;
 
@@ -187,7 +194,6 @@ impl Sandbox for GomukuUI {
         }
     }
 
-    /****************************************************************************************/
     fn view(&mut self) -> Element<Message> {
         let mut iter = self.btn.iter_mut().flat_map(|r| r.iter_mut());
         let mut row_main: Row<Message> = Row::new();
