@@ -50,12 +50,8 @@ enum Message {
     NewGame,
     ExitGame,
 }
-<<<<<<< Updated upstream
 
 //Impliment Sandbox for GomukuUI
-=======
-// Adding visual messages for the User interface
->>>>>>> Stashed changes
 impl Sandbox for GomukuUI {
     type Message = Message;
 
