@@ -1,18 +1,25 @@
-## Team Members:
+## Team Members ( AVENGERS ):
 - Tri Le
 - Tung Le
 - Tuan Nguyen
 - Sanad Jung Thapa
 <h2> Gomoku Caro Game</h2>
 - License by MIT in the file LICENSE
+
 ## Background:
 Gomoku game project is a board game based on the popular Japanese strategy board game called Gomoku. This game is played on a 15 x 15 grid or sometimes on a 19 x 19 grid. For this project, we initially aimed for 15 x 15 but later went with 19x 19 for the game time to go longer. This game is a bigger MAP version of Tic Tac Toe except that the former requires the player to be able to create an unbroken row of five symbols whereas Tic Tac Toe is played on a 3 x 3 grid which makes sense because this one has much bigger MAP size and only requires the player to create an unbroken row of three symbols to win compared to 5 on this one. This game requires 5 symbols of “X” or ”O” to win or if there are no more moves, we  call  it  “Draw”. This game is popular in many Asian countries like Vietnam, Japan, Singapore, etc but now this game  has  also  gained  wide  popularity  all  over  the  world.  <br>
 - For this project everything we planned to do worked like creating the UI, creating Player VS AI and Player Vs Player. In the future, we would like to work on the online net code on this game as well as a chat system so that players can chat with other players while playing with other players all around the world. <br> 
-- *To Run this game we need to download and build it. To do that can do, cargo build, cargo run inside the gomoku_ui folder, which will create a .exe file inside the folder target/debug*
+<br><h2>- *To Run this game we need to download and build it. To do that can do, cargo build, cargo run inside the gomoku_ui folder, which should Run this game and Give you the GAME UI to PLAY* </h2>
 
 
 ## Game User Interface:
 ![Image of this Gomoku Game](https://github.com/PDX-RUST-TTTS/Project-Caro/blob/main/screenshot.PNG)
+
+## Testing:
+- We tested this game in Stable Rust
+- Windows 10 x64 not in MAC VERSION!!
+- rustup check version 1.52.0 and 1.52.1 with no WARNINGS in cargo clippy
+- Game is wokring fine and would recommend updating your rust version if it is lower than 1.52.0 
 
 ## Rules:
 - This game is played using the X and O symbol like in tic tac toe with Player 1 being "*X*" and Player 2 being "*O*", Two players play against each other on a 19 x 19.
